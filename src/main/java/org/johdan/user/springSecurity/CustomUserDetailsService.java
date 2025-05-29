@@ -1,11 +1,7 @@
 package org.johdan.user.springSecurity;
 
-import org.johdan.user.data.models.EveryUser;
+import org.johdan.user.data.models.User;
 import org.johdan.user.data.repositories.UserRepository;
-import org.johdan.user.enums.Role;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
@@ -24,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        EveryUser user = userRepository.findByEmail(email)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().name());
@@ -35,10 +31,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                 Collections.singleton(authority)
         );
     }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService(userRepository);
-    }
-
 }

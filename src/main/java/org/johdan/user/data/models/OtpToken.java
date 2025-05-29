@@ -40,4 +40,8 @@ public class OtpToken {
             this.expiresAt = this.createdAt.plusMinutes(5);
         }
     }
+
+    public void setUsed(boolean state) {
+        this.isUsed = state;
+    }
 }
