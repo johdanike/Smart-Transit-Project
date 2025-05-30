@@ -6,12 +6,13 @@ import lombok.Setter;
 import org.johdan.user.enums.BusStatus;
 import org.johdan.user.enums.BusType;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @Table(name = "buses")
 public class Bus {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,8 +28,11 @@ public class Bus {
     @Column(nullable = false)
     private BusStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "route_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
+    @OneToMany(mappedBy = "bus")
+    private List<Trip> trips;
 }
+

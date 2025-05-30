@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "routes")
 public class Route {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +18,9 @@ public class Route {
     @Column(nullable = false, unique = true)
     private String routeName;
 
-    @OneToMany(mappedBy = "route")
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BusStop> busStops;
 
+    @OneToMany(mappedBy = "route")
+    private List<Bus> buses;
 }

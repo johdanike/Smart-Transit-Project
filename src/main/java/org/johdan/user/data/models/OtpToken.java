@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "otp_tokens")
 public class OtpToken {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,9 +38,5 @@ public class OtpToken {
         if (this.expiresAt == null) {
             this.expiresAt = this.createdAt.plusMinutes(5);
         }
-    }
-
-    public void setUsed(boolean state) {
-        this.isUsed = state;
     }
 }

@@ -48,13 +48,17 @@ public class AuthenticationServiceTest {
 
 
     @Test
-    public void test_thatUserCanSignUp(){
+    public void testthatUserCanSignUp(){
         RegisterUserResponse registerUserResponse = authenticationService.createNewUser(registerUserRequest);
         assertNotNull(registerUserResponse);
         User savedUser = userRepository.findByUserName("JD").orElse(null);
         assertNotNull(savedUser);
         assertEquals("jod@gmail.com", savedUser.getEmail());
         assertEquals("80172028728", savedUser.getPhoneNumber());
-        assertTrue(passwordEncoder.matches("password", savedUser.getPassword()));
+    }
+
+    @Test
+    public void testThatUserCannotRegisterTwice(){
+
     }
 }

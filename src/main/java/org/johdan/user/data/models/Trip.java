@@ -14,11 +14,13 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String busId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bus_id", nullable = false)
+    private Bus bus;
 
-    @Column(nullable = false)
-    private String routeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
     @Column(nullable = false)
     private LocalDateTime startTime;
@@ -27,7 +29,6 @@ public class Trip {
     private LocalDateTime endTime;
 
     private String currentLocation;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

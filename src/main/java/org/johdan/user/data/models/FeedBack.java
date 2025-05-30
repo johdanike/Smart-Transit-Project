@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "feedback")
 public class FeedBack {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,8 +20,9 @@ public class FeedBack {
     @Column(nullable = false)
     private String userId;
 
-    @Column(nullable = false)
-    private String busId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bus_id", nullable = false)
+    private Bus bus;
 
     @Column(nullable = false, length = 1000)
     private String comment;

@@ -47,7 +47,7 @@ public class OtpService {
         boolean isValid = token.getOtpCode().equals(otpCode) &&
                 token.getCreatedAt().isAfter(LocalDateTime.now().minusMinutes(5));
         if (isValid) {
-            token.setUsed(true);
+            token.setIsUsed(true);
             otpTokenRepository.save(token);
         }
         return isValid;

@@ -25,8 +25,9 @@ public class SeatReservation {
     @Column(nullable = false)
     private String userId;
 
-    @Column(nullable = false)
-    private String tripId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id", nullable = false)
+    private Trip trip;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
