@@ -52,7 +52,7 @@ public class AuthenticationController {
             User user = userRepository.findByPhoneNumber(phone)
                     .orElseGet(() -> userRepository.save(new User()));
 
-            String jwt = jwtUtil.generateToken(user.getUsername(), user.getRole());
+            String jwt = jwtUtil.generateAccessToken(user.getUsername(), user.getRole());
             return ResponseEntity.ok(Map.of("token", jwt));
         }
 

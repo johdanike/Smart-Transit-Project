@@ -45,6 +45,9 @@ public class User implements UserDetails, Serializable {
     @Column(nullable = false)
     private Boolean isVerified = false;
 
+    @Column(nullable = false)
+    private Boolean isLoggedIn;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -81,4 +84,5 @@ public class User implements UserDetails, Serializable {
     public boolean isEnabled() {
         return true;
     }
+
 }
